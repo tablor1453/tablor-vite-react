@@ -1,21 +1,22 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import Button from "../Elements/Button";
 
 const CardProduct = (props) => {
     const { children } = props;
     return(
-        <div className="w-full max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow mx-2 flex flex-col justify-between">
+        <div className="w-full max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow m-2 flex flex-col justify-between">
             {children}
         </div>
     );
 }
 
 const Header = (props) => {
-    const { image, alt } = props;
+    const { image, alt, id } = props;
     return(
-        <a href="#">
-            <img src={image} alt={alt} className="p-5 rounded-t-lg" />
-        </a>
+        <Link to={`/product/${id}`}>
+            <img src={image} alt={alt} className="p-5 rounded-t-lg h-60 w-full object-cover" />
+        </Link>
     );
 }
 
@@ -25,22 +26,24 @@ const Body = (props) => {
         <div className="px-5 pb-5 h-full">
             <a href="#">
                 <h5 className="text-xl font-semibold tracking-tight text-white">
-                    {name}
+                    {name.substring(0, 30)} ...
                 </h5>
             </a>
             <p className="text-m text-white">
-                {children}
+                {children.substring(0, 100)} ...
             </p>
         </div>
     );
 }
 
 const Footer = (props) => {
-    const { price } = props;
+    const { price, handlerAddToCard, id } = props;
     return(
         <div className="flex items-center justify-between px-5 pb-5">
-            <span className="text-xl font-bold text-white">{price}</span>
-            <Button classname="bg-blue-600">Add To Cart</Button>
+            <span className="text-xl font-bold text-white">USD {price.toLocaleString('id-ID', {styles: 'currency', currency: 'USD' })}</span>
+            <Button customclass="bg-blue-600" onClick={() => handlerAddToCard(id) }>
+                Add To Cart
+            </Button>
         </div>
     );
 }
