@@ -9,6 +9,10 @@ import ProductsPage from './pages/products'
 import DetailProduct from './pages/detailProduct'
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import { useLogin } from './hooks/useLogin'
+
+
+// const userLogin = useLogin();
 
 const router = createBrowserRouter([
   {
@@ -19,6 +23,7 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />
+    // element: userLogin() ? <Redirect to="/" /> : <LoginPage />,
   },
   {
     path: "/register",

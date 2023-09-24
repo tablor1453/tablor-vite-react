@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getUserName } from "../services/auth.service";
+// import { Redirect } from "react-router-dom";
 
 export const useLogin = () => {
     const [username, setUserName] =  useState("");
@@ -9,6 +10,7 @@ export const useLogin = () => {
 
         if(token) {
             setUserName(getUserName(token));
+            window.location.href = "/";
         }else{
             window.location.href = "/login";
         }
