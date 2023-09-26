@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../Elements/Button";
 import { resetCart } from "../../redux/slices/cartSlice";
@@ -13,6 +13,7 @@ const TableCart = (props) => {
     const cart = useSelector((state) => state.cart.data);
     // const [totalPrice, setTotalPrice] = useState(0);
     const totalPriceRef = useRef([null]);
+    // eslint-disable-next-line no-unused-vars
     const {isDarkMode, setIsDarkMode} = useContext(DarkMode);
     const dispatchTotal = useTotalPriceDispatch();
     const { total } = useTotalPrice();
