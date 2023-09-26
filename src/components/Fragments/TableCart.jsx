@@ -1,15 +1,21 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../Elements/Button";
 import { resetCart } from "../../redux/slices/cartSlice";
+import { DarkMode } from "../../context/Darkmode";
+import { useTotalPrice, useTotalPriceDispatch } from "../../context/TotalPriceContext";
 
 const TableCart = (props) => {
-    const dispatch = useDispatch();
     const { products } = props;
+    const dispatchResetTable = useDispatch();
+    const dispatchReset = useTotalPriceDispatch();
     const cart = useSelector((state) => state.cart.data);
-    const [totalPrice, setTotalPrice] = useState(0);
+    // const [totalPrice, setTotalPrice] = useState(0);
     const totalPriceRef = useRef([null]);
+    const {isDarkMode, setIsDarkMode} = useContext(DarkMode);
+    const dispatchTotal = useTotalPriceDispatch();
+    const { total } = useTotalPrice();
 
     useEffect(() => {
         if(products.length > 0 && cart.length > 0){
@@ -17,10 +23,15 @@ const TableCart = (props) => {
                 const product = products.find((product) => product.id === item.id);
                 return acc + product.price * item.qty;
             }, 0);
-            setTotalPrice(sum);
+            dispatchTotal({
+                type: "UPDATE",
+                payload: {
+                    total: sum,
+                },
+            });
             localStorage.setItem("cart", JSON.stringify(cart));
         }
-    }, [cart, products]);
+    }, [cart, dispatchTotal, products]);
 
     useEffect(() => {
         if(cart.length > 0) {
@@ -32,7 +43,7 @@ const TableCart = (props) => {
 
     return(
         <>
-        <table className="my-4">
+        <table className={`my-4 ${isDarkMode && "text-white"}`}>
             <thead>
                 <tr className="text-left">
                     <th>Product</th>
@@ -71,14 +82,23 @@ const TableCart = (props) => {
                     <td  className="pt-5">
                         <b>
                             ${" "}
-                            {(totalPrice).toLocaleString("id-ID", {styles: "currency", currency: "USD"})}
+                            {total.toLocaleString("id-ID", {styles: "currency", currency: "USD"})}
                         </b>
                     </td>
                 </tr>
             </tbody>
         </table>
             {/* <Button onClick={resetCart}>Reset Cart</Button> */}
-            <Button onClick={() => dispatch(resetCart())}>Reset Cart</Button>
+            {/* <Button onClick={() => dispatchReset(resetCart())}>Reset Cart</Button> */}
+            <Button onClick={() => {
+                dispatchResetTable(resetCart());
+                dispatchReset({
+                    type: "RESET",
+                    payload: {
+                        total: 0,
+                    },
+                })
+            }}>Reset Cart</Button>
         </>
     );
 }

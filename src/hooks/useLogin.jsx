@@ -10,10 +10,10 @@ export const useLogin = () => {
 
         if(token) {
             setUserName(getUserName(token));
-            window.location.href = "/";
         }else{
             window.location.href = "/login";
         }
+
     }, []);
 
     return username;
