@@ -9,7 +9,7 @@ import ProductsPage from './pages/products'
 import DetailProduct from './pages/detailProduct'
 import { Provider } from 'react-redux'
 import store from './redux/store'
-import DarkModeContextProvider from './context/Darkmode'
+import DarkModeContextProvider from './context/DarkMode'
 import { TotalPriceProvider } from './context/TotalPriceContext'
 import HomePage from './pages/Home'
 
