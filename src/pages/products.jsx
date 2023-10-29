@@ -6,7 +6,7 @@ import { getProducts } from "../services/product.service";
 import { useLogin } from "../hooks/useLogin";
 import TableCart from "../components/Fragments/TableCart";
 import Navbar from "../components/Layouts/Navbar";
-import { DarkMode } from "../context/Darkmode";
+import { DarkMode } from "../context/DarkMode";
 
 const ProductsPage = () => {
     const [products, setProduct] = useState([]);
