@@ -3,20 +3,19 @@ import Button from "../Elements/Button";
 import InputForm from "../Elements/Input";
 import { login } from "../../services/auth.service";
 
-const FormLogin = () => 
-{
+const FormLogin = () => {
   const [loginFailed, setLoginFailed] = useState("");
 
   const handleLogin = (event) => {
     event.preventDefault();
 
     // console.log(event.target.username.value)
-    if(!event.target.username.value) {
+    if (!event.target.username.value) {
       console.log('Email harus diisi');
       return;
     }
 
-    if(!event.target.password.value) {
+    if (!event.target.password.value) {
       console.log('Password harus diisi');
       return;
     }
@@ -29,11 +28,15 @@ const FormLogin = () =>
     }
 
     login(data, (status, res) => {
-      if(status) {
+      if (status) {
         console.log(res);
+        // if (localStorage.getItem('cart') === null) {
+        //   localStorage.setItem('cart', []);
+        // }
+
         localStorage.setItem('token', res);
         window.location.href = "/products";
-      }else{
+      } else {
         setLoginFailed(res.response.data);
         console.log(res.response.data);
       }
@@ -47,26 +50,26 @@ const FormLogin = () =>
     usernameRef.current.focus();
   }, []);
 
-  return(
-      <form onSubmit={handleLogin}>
-        <InputForm
-          label="Username"
-          type="text"
-          placeholder="Jhon Doe"
-          name="username"
-          ref={usernameRef}
-        />
-        <InputForm 
-          label="Password"
-          type="password"
-          placeholder="xxxxxxxxxxxxxx"
-          name="password"
-        />
-        <Button customclass="bg-blue-700 w-full" type="submit" >Login</Button>
-        {loginFailed && <p className="text-red-500 text-center mt-5">{loginFailed}</p>}
-        {/* <Button customclass="bg-blue-700 w-full" onClick={() => console.log('polos')} >Test</Button>
+  return (
+    <form onSubmit={handleLogin}>
+      <InputForm
+        label="Username"
+        type="text"
+        placeholder="Jhon Doe"
+        name="username"
+        ref={usernameRef}
+      />
+      <InputForm
+        label="Password"
+        type="password"
+        placeholder="xxxxxxxxxxxxxx"
+        name="password"
+      />
+      <Button customclass="bg-blue-700 w-full" type="submit" >Login</Button>
+      {loginFailed && <p className="text-red-500 text-center mt-5">{loginFailed}</p>}
+      {/* <Button customclass="bg-blue-700 w-full" onClick={() => console.log('polos')} >Test</Button>
         <Button customclass="bg-blue-700 w-full" >Cik Test</Button> */}
-      </form>
+    </form>
   );
 }
 

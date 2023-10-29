@@ -8,17 +8,16 @@ import TableCart from "../components/Fragments/TableCart";
 import Navbar from "../components/Layouts/Navbar";
 import { DarkMode } from "../context/Darkmode";
 
-const ProductsPage = () => 
-{
+const ProductsPage = () => {
     const [products, setProduct] = useState([]);
     const username = useLogin();
-    const {isDarkMode, setIsDarkMode} = useContext(DarkMode);
+    const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
 
     useEffect(() => {
         getProducts((data) => setProduct(data));
     }, []);
 
-    return(
+    return (
         <Fragment>
             <Navbar />
             <div className={`flex justify-center py-5 ${isDarkMode && "bg-slate-900"}`}>
@@ -29,8 +28,8 @@ const ProductsPage = () =>
                             <CardProduct.Body name={product.title}>
                                 {product.description}
                             </CardProduct.Body>
-                            <CardProduct.Footer 
-                                price={product.price} 
+                            <CardProduct.Footer
+                                price={product.price}
                                 id={product.id}
                             />
                         </CardProduct>

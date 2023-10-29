@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import DarkModeContextProvider from './context/Darkmode'
 import { TotalPriceProvider } from './context/TotalPriceContext'
+import HomePage from './pages/Home'
 
 
 // const userLogin = useLogin();
@@ -18,8 +19,8 @@ import { TotalPriceProvider } from './context/TotalPriceContext'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello WOrld</div>,
-    errorElement: <ErrorPage/>
+    element: <HomePage />,
+    errorElement: <ErrorPage />
   },
   {
     path: "/login",
@@ -47,7 +48,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <TotalPriceProvider>
           <RouterProvider router={router} />
         </TotalPriceProvider>
-        </DarkModeContextProvider>
+      </DarkModeContextProvider>
 
     </Provider>
   </React.StrictMode>,
