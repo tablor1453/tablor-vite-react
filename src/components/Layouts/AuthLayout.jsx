@@ -1,11 +1,15 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { DarkMode } from "../../context/DarkMode";
+// import { useSelector } from "react-redux";
 
 /* eslint-disable react/prop-types */
 const AuthLayout = (props) => {
     const { children, title, type } = props;
     const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
+    // const cart = useSelector((state) => state);
+
+    // console.log(cart);
 
     return (
         // <div className="flex justify-center min-h-screen items-center">
@@ -15,25 +19,25 @@ const AuthLayout = (props) => {
                     {isDarkMode ? "Light" : "Dark"}
                 </button>
                 <h1 className="text-3xl font-bold mb-2 text-blue-600">{title}</h1>
-                <p className="font-medium text-slat-500 mb-8">
+                <p className={`font-medium text-slat-500 mb-8 ${isDarkMode && "text-white"}`}>
                     Welcome, please enter your details.
                 </p>
                 {children}
-                <p className="text-sm mt-3">
+                <p className={`text-sm mt-3 ${isDarkMode && "text-white"}`}>
                     {type === 'login' ? `Don't have an account? ` : `Already have an account? `}
                     {type === 'login' && (
-                        <Link to="/register" className="font-bold text-blue-600">
+                        <Link to="/register" className="font-bold text-blue-600 hover:text-blue-400">
                             Sign up
                         </Link>
                     )}
                     {type === 'register' && (
-                        <Link to="/login" className="font-bold text-blue-600">
-                            Sign in
+                        <Link to="/login" className="font-bold text-blue-600 hover:text-blue-400">
+                            Login
                         </Link>
                     )}
                 </p>
             </div>
-        </div>
+        </div >
     );
 }
 

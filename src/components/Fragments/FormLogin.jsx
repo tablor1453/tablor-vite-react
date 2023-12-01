@@ -46,7 +46,6 @@ const FormLogin = () => {
 
   const usernameRef = useRef(null);
   useEffect(() => {
-    // console.log(usernameRef);
     usernameRef.current.focus();
   }, []);
 
@@ -65,7 +64,7 @@ const FormLogin = () => {
         placeholder="xxxxxxxxxxxxxx"
         name="password"
       />
-      <Button customclass="bg-blue-700 w-full" type="submit" >Login</Button>
+      <Button customclass="bg-blue-700 w-full hover:bg-blue-600" type="submit" >Login</Button>
       {loginFailed && <p className="text-red-500 text-center mt-5">{loginFailed}</p>}
       {/* <Button customclass="bg-blue-700 w-full" onClick={() => console.log('polos')} >Test</Button>
         <Button customclass="bg-blue-700 w-full" >Cik Test</Button> */}
